@@ -1,0 +1,37 @@
+// Cores principais
+$primary: #2c5282;
+$secondary: #718096;
+$success: #38a169;
+$danger: #e53e3e;
+$warning: #d69e2e;
+$info: #3182ce;
+
+// Cores personalizadas
+$pregao-primary: #2c5282;
+$pregao-secondary: #4a5568;
+$pregao-accent: #f56565;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Espaçamentos
+$spacer: 1rem;
+$spacers: (
+    0: 0,
+    1: $spacer * 0.25,
+    2: $spacer * 0.5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+    6: $spacer * 4.5,
+    7: $spacer * 6,
+);
+
+// Tipografia
+$font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.6;

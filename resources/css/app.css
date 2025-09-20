@@ -1,0 +1,25 @@
+// Variables
+@import 'variables';
+@import 'mixins';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import 'bootstrap-overrides';
+
+// Components
+@import 'components/header';
+@import 'components/footer';
+@import 'components/cards';
+@import 'components/buttons';
+@import 'components/forms';
+
+// Pages
+@import 'pages/homepage';
+@import 'pages/product';
+@import 'pages/checkout';
+
+// Layout
+@import 'layout/grid';
+@import 'layout/utilities';
+@import 'layout/responsive';
+

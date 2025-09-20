@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Vue 3</title>
+</head>
+<body>
+    <div id="app">{{ message }}</div>
+    
+    <script type="module">
+        import { createApp } from 'vue';
+        
+        const app = createApp({
+            data() {
+                return {
+                    message: 'Vue 3 está funcionando!'
+                };
+            }
+        });
+        
+        app.mount('#app');
+    </script>
+</body>
+</html>
