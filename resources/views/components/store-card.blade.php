@@ -1,72 +1,35 @@
-<div class="store-card card h-100 shadow-sm">
-    <!-- Store Header -->
-    <div class="store-header position-relative">
-        <!-- Cover Image -->
-        <img src="{{ $store->banner ? asset('storage/' . $store->banner) : asset('images/store-banner.jpg') }}" 
-             class="card-img-top" alt="{{ $store->name }}" style="height: 120px; object-fit: cover;">
-        
-        <!-- Store Logo -->
-        <div class="store-logo position-absolute top-100 start-50 translate-middle">
-            <img src="{{ $store->logo ? asset('storage/' . $store->logo) : asset('images/store-logo.png') }}" 
-                 alt="{{ $store->name }}" class="rounded-circle border border-4 border-white" 
-                 style="width: 80px; height: 80px; object-fit: cover;">
-        </div>
+@props(['store'])
+
+<div class="card h-100 shadow-sm store-card">
+    {{-- Logo da loja --}}
+    <div class="card-img-top text-center p-3">
+        <a href="{{ route('stores.show', $store->slug) }}">
+            <img src="{{ $store->logo_url ?? asset('images/store-placeholder.png') }}" 
+                 alt="{{ $store->name }}" 
+                 class="img-fluid rounded-circle" 
+                 style="width: 100px; height: 100px; object-fit: cover;">
+        </a>
     </div>
 
-    <!-- Store Body -->
-    <div class="card-body text-center mt-4">
-        <!-- Store Name -->
-        <h5 class="card-title">
-            <a href="{{ route('stores.show', $store->slug) }}" class="text-decoration-none text-dark">
+    {{-- Corpo --}}
+    <div class="card-body text-center">
+        <h5 class="card-title mb-1">
+            <a href="{{ route('stores.show', $store->slug) }}" class="text-decoration-none fw-bold">
                 {{ $store->name }}
             </a>
         </h5>
-
-        <!-- Verification Badge -->
-        @if($store->is_verified)
-        <span class="badge bg-success mb-2">
-            <i class="fas fa-check-circle me-1"></i>Verificado
-        </span>
-        @endif
-
-        <!-- Rating -->
-        <div class="store-rating mb-2">
-            <div class="stars">
-                @for($i = 1; $i <= 5; $i++)
-                <i class="fas fa-star {{ $i <= floor($store->rating) ? 'text-warning' : 'text-muted' }}"></i>
-                @endfor
-            </div>
-            <small class="text-muted">({{ $store->total_ratings }})</small>
-        </div>
-
-        <!-- Store Description -->
-        <p class="card-text text-muted small">
-            {{ Str::limit($store->description, 100) }}
+        <p class="text-muted small mb-2">
+            {{ Str::limit($store->description, 80) }}
         </p>
 
-        <!-- Store Stats -->
-        <div class="store-stats row text-center mb-3">
-            <div class="col-4">
-                <div class="stat-number fw-bold">{{ $store->products_count }}</div>
-                <div class="stat-label text-muted small">Produtos</div>
-            </div>
-            <div class="col-4">
-                <div class="stat-number fw-bold">{{ $store->sales_count }}</div>
-                <div class="stat-label text-muted small">Vendas</div>
-            </div>
-            <div class="col-4">
-                <div class="stat-number fw-bold">{{ $store->followers_count }}</div>
-                <div class="stat-label text-muted small">Seguidores</div>
-            </div>
-        </div>
-    </div>
+        {{-- Status da loja --}}
+        <x-status-badge :status="$store->status" class="mb-2" />
 
-    <!-- Card Footer -->
-    <div class="card-footer bg-transparent">
-        <div class="d-grid gap-2">
-            <a href="{{ route('stores.show', $store->slug) }}" class="btn btn-outline-primary">
-                <i class="fas fa-store me-2"></i>Visitar Loja
-            </a>
+        {{-- Botão visitar --}}
+        <div class="mt-3">
+            <x-button type="outline" size="sm" url="{{ route('stores.show', $store->slug) }}" icon="fas fa-store">
+                Visitar Loja
+            </x-button>
         </div>
     </div>
 </div>

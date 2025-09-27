@@ -22,9 +22,10 @@ Route::prefix('api')->group(function () {
     Route::delete('/cart/clear', [App\Http\Controllers\Api\CartController::class, 'clear']);
 
     // ===== ROTAS DE AUTH API =====
-    Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
-    Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
-    Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+    //Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+    //Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+    //Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+    
 });
 
 // ===== ROTAS PROTEGIDAS =====
