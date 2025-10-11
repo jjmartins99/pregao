@@ -1,0 +1,1 @@
+import{g as s,b as t,o}from"./app-CYPSmlKx.js";const a={class:"text-center mt-5"},c={__name:"Welcome",setup(n){return(r,e)=>(o(),s("div",a,[...e[0]||(e[0]=[t("h1",null,"👋 Olá, PREGÃO Inertia/Vue 3 está ativo!",-1),t("p",null,"Se estás a ver isto, o Inertia está a funcionar 🚀",-1)])]))}};export{c as default};

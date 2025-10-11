@@ -1,0 +1,83 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\POSController;
+use App\Http\Controllers\StockController;
+
+// Rotas de autenticação
+Auth::routes();
+
+// Rotas para Vue.js - SPA
+/*Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
+*/
+
+// Rotas protegidas
+Route::middleware(['auth'])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+    
+    // POS Routes
+    Route::prefix('pos')->middleware('permission:pos_access')->group(function () {
+        Route::get('/{branch}', [POSController::class, 'index'])->name('pos.index');
+        Route::post('/{branch}/sale', [POSController::class, 'processSale'])->name('pos.processSale');
+        Route::get('/product/{product}', [POSController::class, 'getProductDetails'])->name('pos.productDetails');
+        Route::get('/products/search', [POSController::class, 'searchProducts'])->name('pos.searchProducts');
+    });
+    
+    // Stock Management Routes
+    Route::prefix('stock')->middleware('permission:manage_stock')->group(function () {
+        Route::get('/', [StockController::class, 'index'])->name('stock.index');
+        Route::post('/add', [StockController::class, 'addStock'])->name('stock.add');
+        Route::post('/adjust', [StockController::class, 'adjustStock'])->name('stock.adjust');
+        Route::post('/transfer', [StockController::class, 'transferStock'])->name('stock.transfer');
+        Route::get('/history', [StockController::class, 'movementHistory'])->name('stock.history');
+    });
+    
+    // Product Management Routes
+    Route::resource('products', ProductController::class)->middleware('permission:manage_products');
+    
+    // Sales Management Routes
+    Route::resource('sales', SaleController::class)->middleware('permission:manage_orders');
+    
+    // User Management Routes
+    Route::resource('users', UserController::class)->middleware('permission:manage_users');
+    
+    // Company Management Routes
+    Route::resource('companies', CompanyController::class)->middleware('permission:manage_company');
+    
+    // Branch Management Routes
+    Route::resource('branches', BranchController::class)->middleware('permission:manage_branches');
+    
+    // Reports Routes
+    Route::prefix('reports')->middleware('permission:view_reports')->group(function () {
+        Route::get('/sales', [ReportController::class, 'sales'])->name('reports.sales');
+        Route::get('/stock', [ReportController::class, 'stock'])->name('reports.stock');
+        Route::get('/saft', [ReportController::class, 'saft'])->name('reports.saft');
+    });
+});
+
+//<?php
+
+//use Illuminate\Support\Facades\Route;
+
+// Rotas para API
+Route::prefix('api')->group(function () {
+    Route::get('/marketplace/products', [App\Http\Controllers\Api\MarketplaceController::class, 'products']);
+    Route::get('/marketplace/products/{id}', [App\Http\Controllers\Api\MarketplaceController::class, 'show']);
+    Route::get('/marketplace/categories', [App\Http\Controllers\Api\MarketplaceController::class, 'categories']);
+    Route::get('/marketplace/stores', [App\Http\Controllers\Api\MarketplaceController::class, 'stores']);
+    
+    // Rotas do carrinho
+    Route::get('/cart', [App\Http\Controllers\Api\CartController::class, 'index']);
+    Route::post('/cart/add', [App\Http\Controllers\Api\CartController::class, 'add']);
+    Route::post('/cart/update/{item}', [App\Http\Controllers\Api\CartController::class, 'update']);
+    Route::delete('/cart/remove/{item}', [App\Http\Controllers\Api\CartController::class, 'remove']);
+    Route::delete('/cart/clear', [App\Http\Controllers\Api\CartController::class, 'clear']);
+});
+
+// Rotas para Vue.js - SPA (deve ser a última rota)
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
