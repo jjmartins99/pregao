@@ -6,32 +6,31 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes — PREGÃO SPA
-|--------------------------------------------------------------------------
-|
-| Aqui definimos as rotas principais do modo SPA.
-| A rota '/' carrega a página Home.vue.
-|
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 */
 
-// Página inicial do SPA
-Route::get('/', fn() => Inertia::render('Home'))->name('home');
+Route::get('/', function(){
+    return Inertia::render('Welcome');
+})->name('welcome');
+Route::get('/home', function(){
+    return Inertia::render('Home');
+})->name('home');
 
-// Exemplo: marketplace SPA
-Route::get('/marketplace', fn() => Inertia::render('Marketplace/Index'))->name('marketplace');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Dashboard (acesso autenticado)
-Route::get('/dashboard', fn() => Inertia::render('Dashboard'))
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-// Perfil do utilizador (rotas Breeze)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Rotas Breeze Auth
 require __DIR__.'/auth.php';
