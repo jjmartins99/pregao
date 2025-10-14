@@ -1,25 +1,14 @@
 <template>
-  <header class="bg-white shadow-sm">
-    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <a href="/" class="text-lg font-bold text-gray-800">🛒 PREGÃO</a>
-        <nav class="hidden md:flex space-x-4">
-          <router-link to="/" class="text-gray-600 hover:text-gray-900">Início</router-link>
-          <router-link to="/marketplace" class="text-gray-600 hover:text-gray-900">Marketplace</router-link>
-          <router-link to="/dashboard" class="text-gray-600 hover:text-gray-900">Dashboard</router-link>
-        </nav>
-      </div>
-      <div class="flex items-center space-x-3">
-        <SearchBar />
-        <a href="/login" class="text-sm text-gray-600 hover:text-gray-900">Login</a>
+  <nav class="bg-white shadow">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <router-link to="/" class="text-2xl font-bold text-indigo-600">Pregão</router-link>
+      <div class="flex space-x-4">
+        <router-link to="/" class="hover:text-indigo-500">Home</router-link>
+        <router-link to="/marketplace" class="hover:text-indigo-500">Marketplace</router-link>
+        <router-link to="/about" class="hover:text-indigo-500">Sobre</router-link>
+        <router-link to="/dashboard" class="hover:text-indigo-500">Dashboard</router-link>
+        <router-link to="/login" class="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700">Entrar</router-link>
       </div>
     </div>
-  </header>
+  </nav>
 </template>
-
-<script>
-import SearchBar from '@/components/SearchBar.vue'
-export default {
-  components: { SearchBar }
-}
-</script>
