@@ -1,0 +1,31 @@
+@extends('layouts.vendor')
+
+@section('page-title', 'Minha Loja')
+@section('page-subtitle', 'Edite as informações da sua loja')
+
+@section('vendor-content')
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form action="{{ route('vendor.store.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <x-form-input name="name" label="Nome da Loja" :value="$store->name" required />
+            <x-form-input name="description" label="Descrição" type="textarea" :value="$store->description" required />
+            
+            <div class="mb-3">
+                <label class="form-label">Logo</label>
+                <input type="file" class="form-control" name="logo">
+                @if($store->logo)
+                    <img src="{{ asset('storage/'.$store->logo) }}" class="img-thumbnail mt-2" width="120">
+                @endif
+            </div>
+
+            <x-form-input name="phone" label="Telefone" :value="$store->phone" />
+            <x-form-input name="address" label="Endereço" :value="$store->address" />
+
+            <button type="submit" class="btn btn-primary">Guardar Alterações</button>
+        </form>
+    </div>
+</div>
+@endsection
