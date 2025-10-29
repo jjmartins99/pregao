@@ -7,6 +7,6 @@
     <title>Pregão SPA</title>
 </head>
 <body class="antialiased bg-gray-100">
-    <div id="app"></div>
+    @inertia
 </body>
 </html>

@@ -11,13 +11,17 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
+    "autoprefixer": "^10.4.21",
+    "cross-env": "^7.0.3",
+    "currently": "^0.0.8",
     "laravel-vite-plugin": "^1.0.2",
-    "vite": "^5.4.10",
-    "cross-env": "^7.0.3"
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.16",
+    "vite": "^5.4.10"
   },
   "dependencies": {
-    "vue": "^3.4.27",
     "@inertiajs/vue3": "^1.0.0",
-    "axios": "^1.7.2"
+    "axios": "^1.7.2",
+    "vue": "^3.4.27"
   }
 }
