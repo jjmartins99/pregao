@@ -5,13 +5,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/{any}', function () {
-    return view('app');        
-})->where('any', '.*');
 
 Route::get('/', function(){
     return Inertia::render('Welcome');
 })->name('welcome');
+
 Route::get('/home', function(){
     return Inertia::render('Home');
 })->name('home');
@@ -27,3 +25,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+//deve ser a última rota
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
